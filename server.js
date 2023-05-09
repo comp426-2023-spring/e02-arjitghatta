@@ -68,9 +68,26 @@ const port = args.port || args.p || process.env.PORT || 8080
 app.use(morgan(':remote-addr - :remote-user [:date[iso]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"',
     {stream: fs.createWriteStream(path.join(logpath, 'access.log')), flags: 'a' }
 ))
+
 // Serve static files
 const staticpath = args.stat || args.s || process.env.STATICPATH || path.join(__dirname, 'public')
 app.use('/', express.static(staticpath))
+
+// Create endpoints
+import {rps, rpsls} from "./lib/rpsls.js"
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.get('/app', (req, res) => {res.status(200).send('200 OK').end();});
+app.get('/app/rps', (req, res) => {res.status(200).send(JSON.stringify(rps(req.body.shot))).end();})
+app.get('/app/rpsls', (req, res) => {res.status(200).send(JSON.stringify(rpsls(req.body.shot))).end();})
+app.get('/app/rps/play', (req, res) => {res.status(200).send(JSON.stringify(rps(req.query.shot))).end();})
+app.get('/app/rpsls/play', (req, res) => {res.status(200).send(JSON.stringify(rpsls(req.query.shot))).end();})
+app.post('/app/rps/play', (req, res) => {res.status(200).send(JSON.stringify(rps(req.body.shot))).end();})
+app.post('/app/rpsls/play', (req, res) => {res.status(200).send(JSON.stringify(rpsls(req.body.shot))).end();})
+app.get('/app/rps/play/:shot', (req, res) => {res.status(200).send(JSON.stringify(rps(req.params.shot))).end();})
+app.get('/app/rpsls/play/:shot', (req, res) => {res.status(200).send(JSON.stringify(rpsls(req.params.shot))).end();})
+app.all('*', (req, res) => {res.status(404).send('404 NOT FOUND').end();})
+
 // Create app listener
 const server = app.listen(port)
 // Create a log entry on start
