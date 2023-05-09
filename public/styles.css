@@ -1,8 +1,66 @@
+:root {
+    --colorone: #ff4000;
+    --light_colorone: #7866ff;
+}
+
 body {
+    font-family: "Times New Roman";
 }
 
 h1 {
+    text-align: shift;
+    font-weight: bold;
+    color: var(--colorone);
+}
+
+a {
+    font-weight: bold;
+}
+
+a:link {
+    color: var(--colorone);
+}
+
+a:visited {
+    color: var(--colorone);
+}
+
+a:hover {
+    color: var(--light_colorone);
 }
 
 p {
+    font-weight: bold;
+}
+
+form {
+    margin: 0 auto;
+    width:30%;
+}
+
+legend {
+    font-weight: bold;
+    color: var(--colorone);
+}
+
+fieldset {
+    border-width: 4px;
+    border-style: solid;
+    border-color: var(--light_colorone);
+}
+
+#play_options_menu {
+    visibility: hidden;
+}
+
+label[for="play_options_menu"] {
+    visibility: hidden;
+}
+
+#results {
+    visibility: hidden;
+}
+
+button[type="submit"] {
+    float: right;
 }
