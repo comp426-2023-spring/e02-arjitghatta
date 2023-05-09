@@ -1,66 +1,85 @@
-:root {
-    --colorone: #b300ff;
-    --light_colorone: #7866ff;
-}
-
 body {
-    font-family: "Chrome 1";
+    font-family: Arial, sans-serif;
+    text-align: center;
 }
 
 h1 {
-    text-align: shift;
+    font-size: 3em;
+    margin-top: 1em;
+}
+
+h2 {
+    font-size: 1.5em;
     font-weight: bold;
-    color: var(--colorone);
-}
-
-a {
-    font-weight: bold;
-}
-
-a:link {
-    color: var(--colorone);
-}
-
-a:visited {
-    color: var(--colorone);
-}
-
-a:hover {
-    color: var(--light_colorone);
-}
-
-p {
-    font-weight: bold;
+    margin-bottom: 0.5em;
+    text-transform: uppercase;
 }
 
 form {
-    margin: 0 auto;
-    width:70%;
-}
-
-legend {
-    font-weight: bold;
-    color: var(--colorone);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2em;
 }
 
 fieldset {
-    border-width: 4px;
-    border-style: solid;
-    border-color: var(--light_colorone);
+    border: none;
+    margin: 0;
+    padding: 0;
 }
 
-#play_options_menu {
-    visibility: hidden;
+legend {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    text-transform: uppercase;
 }
 
-label[for="play_options_menu"] {
-    visibility: hidden;
+label {
+    display: flex;
+    align-items: center;
+    margin: 0.5em;
 }
 
-#results {
-    visibility: hidden;
+input[type="radio"] {
+    margin-right: 0.5em;
 }
 
-button[type="submit"] {
-    float: right;
+#gameboard {
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 2em;
+}
+
+#gameboard button {
+    background-color: #fff;
+    border: 2px solid #999;
+    border-radius: 5px;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 0.5em;
+    padding: 0.5em 1em;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    width: 150px;
+}
+
+#gameboard button:hover {
+    background-color: #999;
+    color: #fff;
+    cursor: pointer;
+}
+
+#gameboard button:active {
+    transform: scale(0.9);
+}
+
+#results{
+    font-size: 2em;
+    margin-top: 2em;
+}
+
+#play-again {
+    margin-top: 1em;
 }

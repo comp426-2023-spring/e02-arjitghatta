@@ -2,102 +2,92 @@
 // check out the coin-server example from a previous COMP 426 semester.
 // https://github.com/jdmar3/coinserver
 
-window.addEventListener("DOMContentLoaded", function() {
-    const form = document.getElementById("form")
-    const gameTypeButtons = document.getElementsByName("selected_game")
-    const playOpponentButton = document.getElementById("opponent")
-    const playOptionsMenu = document.getElementById("play_options_menu")
-    const results = document.getElementById("results")
+function unhideOpts() {
+    let check = document.getElementById('opponent');
+    let gameType = document.querySelector('input[name="game-type"]:checked').id;
+    
+    if (check.checked && gameType === 'rpsls') {
+        $('.move').show();
+        $('.rpsls').show();
+        $('.rps').show();
+      } else if (check.checked && gameType === 'rps') {
+        $('.move').show();
+        $('.rps').show();
+        $('.rpsls').hide();
+      } else {
+        $('.move').hide();
+      }
+      console.log(gameType);
+      console.log(check.checked);
+}
 
-    // Update drop down options
-    for (const button of gameTypeButtons) {
-        button.addEventListener("change", function(){
-            const options = ["Rock", "Paper", "Scissors"]
+function resetClear() {
+    document.getElementById('userinput').reset();
+    $('#results').hide();
+    $('#userinput').show();
+    $('#play').show();
+    unhideOpts();
+}
 
-            if (this.value == "rpsls") {
-                options.push("Spock", "Lizard")
-            }
-            playOptionsMenu.innerHTML = ""
-            for (const option of options) {
-                var optionElement = document.createElement("option")
-                optionElement.innerText = option
-                playOptionsMenu.append(optionElement)
-            }
-        })
+async function startGame() {
+    $('#userinput').hide();
+    $('#play').hide();
+
+    let gameType = $('input[type=radio][name=game-type]:checked').val();
+    let vsOpponent = document.querySelector('#opponent').checked;
+    let shot = $('input[type=radio][name=move]:checked').val();
+
+    let baseurl = window.location.href + 'app/'
+    let url = baseurl + gameType + '/play'
+
+    if (vsOpponent) {
+        url += '/' + shot
     }
 
-    // Update visibility of drop down
-    for (const button of document.querySelectorAll("[name='selected_game'], [name='game_mode']")) {
-        button.addEventListener("change", function() {
-            var visibility = "hidden"
-            if (
-                document.querySelectorAll("input[type='radio'][name='selected_game']:checked").length > 0
-                && playOpponentButton.checked
-            ) {
-                visibility = "visible"
-            }
-            playOptionsMenu.style.visibility = visibility
-            for (label of document.querySelectorAll("label[for='play_options_menu']")) {
-                label.style.visibility = visibility
-            }
-        })
-    }
-    form.addEventListener("reset", function(e){
-        e.preventDefault()
-        for (button of document.querySelectorAll("input:checked")) {
-            button.checked = false
-        }
-        results.style.visibility = "hidden"
-        for (button of document.querySelectorAll("input[type='radio'][name='selected_game'], input[type='radio'][name='game_mode']")) {
-            button.dispatchEvent(new Event("change"))
-        }
-    })
+    let response = await fetch(url)
+    let result = await response.json()
 
-    // Enable/disable submit button
-    for (const button of document.querySelectorAll("[name='selected_game'], [name='game_mode']")) {
-        button.addEventListener("change", function() {
-            disabled = true
-            if (
-                document.querySelectorAll("input[type='radio'][name='selected_game']:checked").length > 0
-                && document.querySelectorAll("input[type='radio'][name='game_mode']:checked").length > 0
-            ) {
-                disabled = false
-            }
-            document.querySelector("button[type='submit']").disabled = disabled
-        })
+    if (vsOpponent) {
+        $('#results').show();
+        document.getElementById("results").innerText = 'You: ' + result.player +
+            '\n\nYour opponent: ' + result.opponent +
+            '\n\nResult: you ' + result.result.toUpperCase() +'\n';
+    } else {
+        $('#results').show();
+        document.getElementById("results").innerText = 'Your random draw is: ' + result.opponent;
     }
+    console.log(url)
+    console.log(result)
+    console.log(result.result)
 
-    // Submit form
-    resultDisplayText = {
-        "win": "won",
-        "lose": "lost",
-        "tie": "tied",
-    }
-    form.addEventListener("submit", function(e){
-        e.preventDefault()
-        const formData = new FormData(form)
-        if (formData.get("game_mode") == "draw") {
-            fetch(`app/${formData.get("selected_game")}/play`)
-                .then((response) => response.json())
-                .then((data) => {
-                    results.innerHTML = `Your random draw is ${data.player}.`
-                    results.style.visibility = "visible"
-                }
-            )
-        } else if (formData.get("game_mode") == "opponent") {
-            fetch(`app/${formData.get("selected_game")}/play`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: `{"shot": "${formData.get("play")}"}`,
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    results.innerHTML = `Opponent played ${data.opponent}. You ${resultDisplayText[data.result]}!`
-                    results.style.visibility = "visible"
-                }
-            )
-        }
-    })
-})
+
+}
+
+function viewrules() {
+    document.getElementById("rules").innerText =
+    `Rules for Rock Paper Scissors:
+    - Scissors CUTS Paper
+    - Paper COVERS Rock
+    - Rock CRUSHES Scissors
+    
+    Rules for the Lizard-Spock Expansion of Rock Paper Scissors:
+    - Scissors CUTS Paper
+    - Paper COVERS Rock
+    - Rock SMOOSHES Lizard
+    - Lizard POISONS Spock
+    - Spock SMASHES Scissors
+    - Scissors DECAPITATES Lizard
+    - Lizard EATS Paper
+    - Paper DISPROVES Spock
+    - Spock VAPORIZES Rock
+    - Rock CRUSHES Scissors`;
+    document.getElementById("rules-btn").hidden = true;
+    document.getElementById("rules").hidden = false;
+    document.getElementById("hide-rules-btn").hidden = false;
+}
+
+function hiderules() {
+    document.getElementById("rules").hidden = true;
+    document.getElementById("hide-rules-btn").hidden = true;
+    document.getElementById("rules-btn").hidden = false;
+}
