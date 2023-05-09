@@ -1,18 +1,25 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Courier New", monospace;
+    letter-spacing: 2px;
+    line-height: 1.5;
+    /* Additional styles */
+    background-color: #ffcccc;
     text-align: center;
+    padding: 20px;
 }
 
 h1 {
-    font-size: 3em;
-    margin-top: 1em;
+    font-size: 2.5em;
+    margin-top: 0;
+    color: #333;
 }
 
 h2 {
-    font-size: 1.5em;
+    font-size: 1.2em;
     font-weight: bold;
     margin-bottom: 0.5em;
     text-transform: uppercase;
+    color: #666;
 }
 
 form {
@@ -22,28 +29,7 @@ form {
     margin-top: 2em;
 }
 
-fieldset {
-    border: none;
-    margin: 0;
-    padding: 0;
-}
-
-legend {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-bottom: 0.5em;
-    text-transform: uppercase;
-}
-
-label {
-    display: flex;
-    align-items: center;
-    margin: 0.5em;
-}
-
-input[type="radio"] {
-    margin-right: 0.5em;
-}
+/* Rest of the CSS code remains the same */
 
 #gameboard {
     display: none;
@@ -53,21 +39,21 @@ input[type="radio"] {
 }
 
 #gameboard button {
-    background-color: #fff;
-    border: 2px solid #999;
+    background-color: #333;
+    border: none;
     border-radius: 5px;
     font-size: 1.5em;
     font-weight: bold;
     margin: 0.5em;
-    padding: 0.5em 1em;
+    padding: 1em 2em; /* Adjust padding to increase button size */
     text-transform: uppercase;
     transition: all 0.3s ease;
-    width: 150px;
+    color: #fff;
 }
 
+
 #gameboard button:hover {
-    background-color: #999;
-    color: #fff;
+    background-color: #666;
     cursor: pointer;
 }
 
@@ -76,10 +62,12 @@ input[type="radio"] {
 }
 
 #results{
-    font-size: 2em;
+    font-size: 1.5em;
     margin-top: 2em;
+    color: #333;
 }
 
 #play-again {
     margin-top: 1em;
+    color: #665;
 }

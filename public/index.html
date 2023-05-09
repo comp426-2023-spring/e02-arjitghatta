@@ -1,65 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Rohan Ray Final Project RPSLS</title>
-        <!-- Link to your script file(s) and CSS in here somewhere -->
-        <link rel="stylesheet" href="styles.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-        <script src="scripts.js"></script>
-    </head>
-    <!-- Your interface markup goes here -->
-    <!-- For interface examples, look in the `/examples/` directory in the root of your starter code repo. -->
-    <body onload="unhideOpts()">
-        <h1>Rock Paper Scissors Lizard Spock</h1>
-        <form id="userinput" class="" action="javascript:void(0);">
-            <fieldset>
-                <legend>Select Game Type:</legend>
-                    <label>
-                        <input type="radio" id="rps" name="game-type" value="rps" checked onclick="unhideOpts()">
-                        Rock Paper Scissors
-                    </label>
-                    <label>
-                        <input type="radio" id="rpsls" name="game-type" value="rpsls" onclick="unhideOpts()">
-                        Rock Paper Scissors Lizard Spock
-                    </label>
-            </fieldset>
-            <fieldset>
-                <legend>Play vs an Opponent?</legend>
-                    <label>
-                        <input type="checkbox" id="opponent" name="play-mode" value="opponent" onclick="unhideOpts()">
-                        Yes
-                    </label>
-            </fieldset>
-
-            <h2 class="move rps rpsls">Select Your Move:</h2>
-                <label class="move rps"><input type="radio" name="move" value="rock" class="move rps" checked>Rock</label>
-                <figure id="rockpic" class="move rps"><img src="./img/rock.jpg" height="60" width="60" alt="rock"></figure>
-                <label class="move rps"><input type="radio" name="move" value="paper" class="move rps" checked>Paper</label>
-                <figure id="paperpic" class="move rps"><img src="./img/paper.jpg" height="60" width="60" alt="paper"></figure>
-                <label class="move rps"><input type="radio" name="move" value="scissors" class="move rps" checked>Scissors</label>
-                <figure id="scissorspic" class="move rps"><img src="./img/scissors.jpg" height="60" width="60" alt="scissors"></figure>
-                <label class="move rpsls"><input type="radio" name="move" value="lizard" class="move rpsls" checked>Lizard</label>
-                    <figure id="lizardpic" class="move rpsls"><img src="./img/lizard.jpg" height="60" width="60" alt="lizard"></figure>
-                <label class="move rpsls"><input type="radio" name="move" value="spock" class="move rpsls" checked>Spock</label>
-                    <figure id="spockpic" class="move rpsls"><img src="./img/spock.jpg" height="60" width="60" alt="spock"></figure>
-        <button type="submit" hidden>Submit</button>
-        </form>
-
-        <button type="button" id="play" onclick="startGame()">Start Game</button>
-        <br><br>
-        <button type="button" id="clear" onclick="resetClear()">Restart Game</button>
-        <br><br>
-
-        <div>
-            <div id="results"></div>
-        </div>
+<body onload="unhideOpts()">
+    <h1>Rock Paper Scissors Lizard Spock</h1>
+    <form id="userinput" class="" action="javascript:void(0);">
         <fieldset>
-            <legend>Rules</legend>
-                <button type="button" id="rules-btn" onclick="viewrules()">View Rules</button>
-                <div id="rules" hidden></div>
-                <br>
-                <button type="button" id="hide-rules-btn" onclick="hiderules()" hidden>Hide Rules</button>
+            <legend>Select Game Type:</legend>
+            <label>
+                <input type="radio" id="rps" name="game-type" value="rps" checked onclick="unhideOpts()">
+                Rock Paper Scissors
+            </label>
+            <label>
+                <input type="radio" id="rpsls" name="game-type" value="rpsls" onclick="unhideOpts()">
+                Rock Paper Scissors Lizard Spock
+            </label>
         </fieldset>
-    </body>
-</html>
+        <fieldset>
+            <legend>Play vs an Opponent?</legend>
+            <label>
+                <input type="checkbox" id="opponent" name="play-mode" value="opponent" onclick="unhideOpts()">
+                Yes
+            </label>
+        </fieldset>
+
+        <h2 class="move rps rpsls">Select Your Move:</h2>
+        <label class="move rps"><input type="radio" name="move" value="rock" class="move rps" checked>Rock</label>
+        <figure id="rockpic" class="move rps"><img src="./img/rock.jpg" height="60" width="60" alt="rock"></figure>
+        <label class="move rps"><input type="radio" name="move" value="paper" class="move rps" checked>Paper</label>
+        <figure id="paperpic" class="move rps"><img src="./img/paper.jpg" height="60" width="60" alt="paper"></figure>
+        <label class="move rps"><input type="radio" name="move" value="scissors" class="move rps" checked>Scissors</label>
+        <figure id="scissorspic" class="move rps"><img src="./img/scissors.jpg" height="60" width="60" alt="scissors"></figure>
+        <label class="move rpsls"><input type="radio" name="move" value="lizard" class="move rpsls" checked>Lizard</label>
+        <figure id="lizardpic" class="move rpsls"><img src="./img/lizard.jpg" height="60" width="60" alt="lizard"></figure>
+        <label class="move rpsls"><input type="radio" name="move" value="spock" class="move rpsls" checked>Spock</label>
+        <figure id="spockpic" class="move rpsls"><img src="./img/spock.jpg" height="60" width="60" alt="spock"></figure>
+        <button type="submit" hidden>Submit</button>
+    </form>
+
+    <button type="button" id="play" onclick="startGame()">Start Game</button>
+    <br><br>
+    <button type="button" id="clear" onclick="resetClear()">Restart Game</button>
+    <br><br>
+
+    <div>
+        <div id="results"></div>
+    </div>
+    <fieldset>
+        <legend>Rules</legend>
+        <button type="button" id="rules-btn" onclick="viewrules()">View Rules</button>
+        <div id="rules" hidden></div>
+        <br>
+        <button type="button" id="hide-rules-btn
